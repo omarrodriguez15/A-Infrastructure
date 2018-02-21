@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "A-ConsoleTest", "A-ConsoleTest.csproj", "{7FC92C45-045C-483D-8D0C-17CBFCC3D369}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FC92C45-045C-483D-8D0C-17CBFCC3D369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC92C45-045C-483D-8D0C-17CBFCC3D369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC92C45-045C-483D-8D0C-17CBFCC3D369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC92C45-045C-483D-8D0C-17CBFCC3D369}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
