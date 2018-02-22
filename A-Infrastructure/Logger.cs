@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Diagnostics;
+using System.IO;
 
 namespace AInfrastructure
 {
@@ -26,6 +27,32 @@ namespace AInfrastructure
         Error
     }
 
+    public class BaseFileLogger : BaseLogger
+    {
+        public string FilePath { set => _filePath = value; }
+
+        protected string _filePath;
+        protected static object _locker = new object();
+
+        public BaseFileLogger(string filePath) : base()
+        {
+            _filePath = filePath;
+            SystemFilePath.CreateDirectory(_filePath);
+        }
+
+        protected override void Log(string msg, LogLevel level, string callee)
+        {
+            msg = $"{DateTime.Now} | {Thread.CurrentThread.ManagedThreadId} | {level} | {callee} | {msg}";
+
+            Console.WriteLine(msg);
+
+            lock(_locker)
+            {
+                File.AppendAllText(_filePath, $"{msg}\r\n");
+            }
+        }
+    }
+
     public class BaseLogger : ILogger
     {
         /// <summary>
@@ -35,13 +62,13 @@ namespace AInfrastructure
         /// <value>The name of the callee.</value>
         protected string _calleeName => (new StackTrace())?.GetFrame(2)?.GetMethod()?.Name;
 
-        protected void Log(string msg, LogLevel level, string callee)
+        protected virtual void Log(string msg, LogLevel level, string callee)
         {
             msg = $"{DateTime.Now} | {Thread.CurrentThread.ManagedThreadId} | {level} | {callee} | {msg}";
             Console.WriteLine(msg);
         }
 
-        protected void Log(Func<string> msgFunc, LogLevel level, string callee)
+        protected virtual void Log(Func<string> msgFunc, LogLevel level, string callee)
         {
             Log(msgFunc?.Invoke(), level, callee);
         }

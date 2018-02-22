@@ -50,7 +50,7 @@ namespace AInfrastructure
         {
             builder = base.Build(builder);
 
-            builder.RegisterType<BaseLogger>().As<ILogger>().SingleInstance();
+            builder.Register(c => new BaseFileLogger(SystemFilePath.GetUsersPath("Desktop/logger.log"))).As<ILogger>().SingleInstance();
             builder.RegisterType<StorageIo>().As<IStorageIo>().SingleInstance();
 
             return builder;
